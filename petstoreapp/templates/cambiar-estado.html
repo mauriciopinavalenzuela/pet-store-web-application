@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Cambiar Estado de la Orden</h1>
+            <form method="POST" action="{% url 'guardar_estado' orden_id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="estado">Estado:</label>
+                    <select name="estado" id="estado" class="form-control">
+                        {% if orden.estado %}
+                            <option value="False">Orden en Proceso</option>
+                            <option value="True" selected>Orden Lista para Retirar</option>
+                        {% else %}
+                            <option value="False" selected>Orden en Proceso</option>
+                            <option value="True">Orden Lista para Retirar</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+

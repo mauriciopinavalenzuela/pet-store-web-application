@@ -1,0 +1,48 @@
+<div  role="alert">
+    <table class="table table-bordered alert alert-warning">
+        <thead>
+            <tr scope="row"class="text-center"><td colspan="3" style="font-weight:bold; font-size:18px">  CARRITO </td></tr>
+            <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">MARCA</td>
+            <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">PRECIO</td>
+            <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">CANTIDAD</td>
+        </thead>
+        <tbody>
+            {% if request.session.carrito.items %}
+                {% for key, value in request.session.carrito.items %} 
+                    <tr>
+                        <td style="font-size:13px">{{ value.marca }}</td>
+                        <td style="font-size:13px">{{ value.precio }}</td>
+                        <td style="font-size:13px">{{ value.cantidad}}
+                            <br>
+                            <a href="{% url 'agregar' value.producto_id %}" class="badge btn btn-danger">+</a>
+                            <a href="{% url 'restar'  value.producto_id %}" class="badge btn btn-danger">-</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Valor Envío:</th>
+                        <td colspan="2">$ {{ valor_envio }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total con Envío:</th>
+                        <td colspan="2">$ {{ total_con_envio  }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">
+                    <div class="alert alert-info text-center" style="font-weight: bold;">Sin Productos</div>
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <hr>
+</div>
+<div class="row text-center">
+    <div class="col-6">
+        <a href="{% url 'limpiar' %}" class="btn btn-outline-warning">Limpiar</a> 
+       </div> 
+       <div class="col-6">
+        <a href="{% url 'generarBoleta' %}" class="btn btn-outline-primary">Comprar</a>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Historial de Compras</h1>
+    <ul>
+        {% for boleta in boletas %}
+            <li>Boleta: {{ boleta.id_boleta }}</li>
+            <li>Total: {{ boleta.total }}</li>
+            <!-- Mostrar más información de la boleta si es necesario -->
+            <hr>
+        {% empty %}
+            <p>No se encontraron compras realizadas.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

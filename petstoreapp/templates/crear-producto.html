@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    {% load crispy_forms_tags %}
+    <div class="row mt-5">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Agregar productos</h2> <hr>
+                    <form action="#" method="post" id="formulario2" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form | crispy}}                    
+                        <div class="d-flex justify-content-center">
+                            <input type="reset" value="Restablecer datos" class="btn btn-danger btn-sm me-5 mr-5">
+                            <input type="submit" value="Agregar producto" class="btn btn-primary btn-sm">
+                        </div>
+                    </form> 
+                </div> 
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}

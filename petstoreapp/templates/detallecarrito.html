@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col">
+                <h3 class="text-center">Detalle de Compra</h3>
+                <hr>
+                <h6 class="text-center">Fecha: {{ fecha }}</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Código Boleta</th>
+                            <th>Código Producto</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prod in productos %}
+                            <tr>
+                                <td>{{ prod.id_boleta }}</td>
+                                <td>{{ prod.id_producto }}</td>
+                                <td>{{ prod.cantidad }}</td>
+                                <td>{{ prod.subtotal }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Resumen de Compra</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Valor neto compra:</h6>
+                            </div>
+                            <div class="col text-right">
+                                <h6>{{ total_sin_impuestos }}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>IVA 19%:</h6>
+                            </div>
+                            <div class="col text-right">
+                                <h6>{{ impuestos }}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Valor Envío:</h6>
+                            </div>
+                            <div class="col text-right">
+                                <h6>{{ valor_envio }}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Total Compra:</h6>
+                            </div>
+                            <div class="col text-right">
+                                <h6>{{ total_con_impuestos }}</h6>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="{% url 'seguimiento' %}" class="btn btn-primary">Ver Seguimiento</a>
+                            <a href="{% url 'tienda' %}" class="btn btn-secondary">Seguir Comprando</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

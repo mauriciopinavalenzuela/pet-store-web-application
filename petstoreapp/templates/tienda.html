@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5">Tienda</h1><br>
+    <div class="row">
+        <div class="col-8">
+            <div class="row" style="padding: 5px 0;">
+                <div class="col-12">
+                    <div class="row">
+                        {% for producto in entity %}
+                        <div class="col-6">
+                            <div class="card text-center">
+                                {% if producto.imagen %}
+                                <img src="{{ producto.imagen.url }}" class="card-img-top mx-auto">
+                                {% else %}
+                                <img src="{% static 'img/no_product_found' %}" class="card-img-top mx-auto">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title" style="font-weight:bold;">Nombre: {{ producto.nombre }}</h5>
+                                    <p class="card-text">
+                                        Marca: {{ producto.marca }}<br>
+                                        Categoría: {{ producto.categoria.nombre }}<br>
+                                        Precio: ${{ producto.precio }}<br>
+                                        Stock: {{ producto.stock }}
+                                    </p>
+                                    {% if producto.stock > 0 %}
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <a href="{% url 'agregar' producto.codigo %}">Agregar al carrito</a>
+                                        
+                                    </form>
+                                    
+                                    {% else %}
+                                    <button class="btn btn-outline-danger" disabled>Agotado</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            {% include "carrito.html" %}
+        </div>
+    </div>
+</div>
+{% include 'paginator.html' %}
+
+{% endblock %}

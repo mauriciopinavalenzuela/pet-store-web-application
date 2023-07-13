@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <h1 class="mt-4">Seguimiento de la Orden</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>Estado de la orden:</h4>
+                <ul class="list-group">
+                    {% for seguimiento in seguimientos %}
+                        <li class="list-group-item">
+                            {% if seguimiento.estado %}
+                                <span class="badge badge-success">Orden completada y lista para enviar</span>
+                                <img src="{% static 'img/endelivery.png' %}" class="img-fluid" alt="Orden Lista">
+                            {% else %}
+                                <span class="badge badge-primary">Orden en Proceso</span>
+                                <img src="{% static 'img/enproceso.jpg' %}" class="img-fluid" alt="Orden en Proceso">
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4>Productos:</h4>
+                <ul class="list-group">
+                    {% for producto in productos %}
+                        <li class="list-group-item">{{ producto.nombre }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

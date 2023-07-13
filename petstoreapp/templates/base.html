@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Store | La tienda para tus mascotas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,900&display=swap"rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <script src="https://kit.fontawesome.com/1c866e61ca.js" crossorigin="anonymous"></script>
+    {% block head %} {% endblock head %}
+</head>
+
+<body>
+    {% load static %}
+    <!--BARRA DE NAVEGACIÓN-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+            <img src="{% static 'img/logo.png' %}" alt="Logo" width="30" height="30" class="mr-2">
+            PetStore
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'nosotros' %}">Sobre Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tienda' %}">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'formulario' %}">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'api' %}">Razas</a>
+                </li>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lista_productos' %}">Gestionar Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lista_ordenes' %}">Gestionar Órdenes</a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated and not user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'historial' %}">Historial de Compras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'seguimiento' %}">Seguimiento Orden</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'registro' %}">Registro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+    
+
+    {% block content %} {% endblock content %}
+
+    <!--FOOTER-->
+    <hr>
+    <section class="footer">
+        <div class="social">
+            <a href="#"><i class="fa-brands fa-square-facebook" style="color: #1e3050;"></i></a>
+            <a href="#"><i class="fa-brands fa-square-instagram" style="color: #c061cb;"></i></a>
+            <a href="#"><i class="fa-brands fa-square-twitter" style="color: #3584e4;"></i></a>
+            <a href="#"><i class="fa-brands fa-square-youtube" style="color: #e01b24;"></i></a>
+            <a href="#"><i class="fa-brands fa-square-google-plus" style="color: #b5835a;"></i></a>
+        </div>
+
+        <ul class="list">
+            <li>
+                <a href="{% url 'index' %}">Inicio</a>
+            </li>
+            <li>
+                <a href="{% url 'nosotros' %}">Servicios</a>
+            </li>
+            <li>
+                <a href="{% url 'nosotros' %}">Sobre Nosotros</a>
+            </li>
+            <li>
+                <a href="#">Terminos y Condiciones</a>
+            </li>
+            <li>
+                <a href="#">Políticas de privacidad</a>
+            </li>
+        </ul>
+
+        <hr>
+        <p class="copyright text-center">
+            Todos los derechos reservados, Mauricio Piña 2023.
+        </p>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    {% block js %} {% endblock js %}
+
+
+
+</body>
+</html>

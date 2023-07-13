@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+
+                <h2 class="text-center mt-5 mb-5">Gestión de órdenes</h2> <hr>
+                <table class="table table-striped table-hover table-responsive-sm">
+                    <tr>
+                        <th>Código</th>
+                        <th>Usuario</th>
+                        <th>Total Compra</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    {% for orden in ordenes %}
+                    <tr>
+                        <td>{{ orden.boleta }}</td>
+                        <td>{{ orden.boleta.usuario.username }}  </td>
+                        <td>{{ orden.boleta.total }}</td>
+                        <td>{{ orden.estado }}</td>
+                        <td><a href="{% url 'cambiar_estado' orden.boleta.id_boleta %}">Cambiar Estado</a></td>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
